@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PermDynamics_Тепляков.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,7 +38,7 @@ namespace PermDynamics_Тепляков
         public void OpenPages(pages _pages)
         {
             if (_pages == pages.main) frame.Navigate(new Pages.Main(this));
-            else if (_pages == pages.chart) frame.Navigate(new Pages.Chart(this));
+            else if (_pages == pages.chart) frame.Navigate(new Pages.Chart(this, new ChartContext()));
         }
     }
 }

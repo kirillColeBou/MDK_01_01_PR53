@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PermDynamics_Тепляков.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
@@ -26,20 +27,24 @@ namespace PermDynamics_Тепляков.Pages
         double averageValue = 0;
         private Line averageLine;
         private double AverageValue = 0;
+        private double newValue = 0;
 
         public double maxValue2 = 0;
         double averageValue2 = 0;
         private Line averageLine2;
         private double AverageValue2 = 0;
+        private double newValue2 = 0;
 
         public MainWindow mainWindow;
         public double actualHeightCanvas = 0;
         public DispatcherTimer dispatcherTimer = new DispatcherTimer();
+        public ChartContext chartContext;
 
-        public Chart(MainWindow mainWindow)
+        public Chart(MainWindow mainWindow, ChartContext _chartContext)
         {
             InitializeComponent();
             this.mainWindow = mainWindow;
+            chartContext = _chartContext;
             actualHeightCanvas = (mainWindow.Height / 2) - 50d;
             dispatcherTimer.Interval = new TimeSpan(0, 0, 2);
             dispatcherTimer.Tick += CreateNewValue;
@@ -48,17 +53,32 @@ namespace PermDynamics_Тепляков.Pages
             ColorChart();
         }
 
+        public void infoDataForSave(string name1, double value1, double avg1, string name2, double value2, double avg2)
+        {
+            var chartsData = new ChartsData
+            {
+                Name1 = name1,
+                Value1 = value1,
+                Avg1 = avg1,
+                Name2 = name2,
+                Value2 = value2,
+                Avg2 = avg2
+            };
+            chartContext.ChartsData.Add(chartsData);
+            chartContext.SaveChanges();
+        }
+
         private void CreateNewValue(object sender, EventArgs e)
         {
             Random random = new Random();
             double value = mainWindow.pointsInfo[mainWindow.pointsInfo.Count - 1].value;
-            double newValue = value * (random.NextDouble() + 0.5d);
+            newValue = value * (random.NextDouble() + 0.5d);
             double sum = mainWindow.pointsInfo.Sum(p => p.value);
             AverageValue = sum / mainWindow.pointsInfo.Count;
             mainWindow.pointsInfo.Add(new Classes.PointInfo(newValue));
 
             double value2 = mainWindow.pointsInfo2[mainWindow.pointsInfo2.Count - 1].value;
-            double newValue2 = value2 * (random.NextDouble() + 0.5d);
+            newValue2 = value2 * (random.NextDouble() + 0.5d);
             double sum2 = mainWindow.pointsInfo2.Sum(y => y.value);
             AverageValue2 = sum2 / mainWindow.pointsInfo2.Count;
             mainWindow.pointsInfo2.Add(new Classes.PointInfo2(newValue2));
@@ -224,6 +244,12 @@ namespace PermDynamics_Тепляков.Pages
             actualHeightCanvas = (mainWindow.Height / 2) - 50d;
             CreateChart();
             ColorChart();
+        }
+
+        private void SaveChartsClick(object sender, RoutedEventArgs e)
+        {
+            infoDataForSave("Charts1", newValue, averageValue, "Charts2", newValue2, averageValue2);
+            MessageBox.Show("Данные сохранены!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }

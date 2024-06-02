@@ -15,6 +15,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <ScrollViewer x:Name="scroll" Grid.Row="0" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden">
             <Canvas x:Name="canvas" Margin="10,10,10,10" HorizontalAlignment="Left"/>
@@ -32,5 +33,6 @@
             <Label x:Name="current_value2" Content="Тек. знач: " Margin="10,10,10,0" VerticalAlignment="Top"/>
             <Label x:Name="average_value2" Content="Сред. знач: " Margin="10,36,10,0" VerticalAlignment="Top"/>
         </Grid>
+        <Button Grid.Row="2" Content="Сохранить данные" Height="25" Width="160" Click="SaveChartsClick" VerticalAlignment="Top"/>
     </Grid>
 </Page>
