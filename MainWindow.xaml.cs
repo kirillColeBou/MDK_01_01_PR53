@@ -21,6 +21,7 @@ namespace PermDynamics_Тепляков
     public partial class MainWindow : Window
     {
         public List<Classes.PointInfo> pointsInfo = new List<Classes.PointInfo>();
+        public List<Classes.PointInfo2> pointsInfo2 = new List<Classes.PointInfo2>();
 
         public enum pages
         {

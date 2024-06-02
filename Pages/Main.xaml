@@ -21,11 +21,15 @@
         <Image HorizontalAlignment="Center" Height="100" Margin="121,179,255.8, 130.6" VerticalAlignment="Center" Width="100"
            Source="/PermDynamics_Тепляков;component/Images/icon-white.png">
         </Image>
-        <Label Content="Укажите начальное значение акции:" Grid.Column="1" Margin="12.2,191,82.4,192.6"
+        <Label Content="Укажите начальное значение акции №1:" Grid.Column="1" Margin="12.2,191,52.4,192.6"
            VerticalAlignment="Center" Foreground="White" Height="26" HorizontalAlignment="Center"/>
         <TextBox x:Name="tb_value" Grid.Column="1" Height="25" Margin="12.2,217,10.4,167.6" VerticalContentAlignment="Center"
              TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" Width="283"/>
+        <Label Content="Укажите начальное значение акции №2:" Grid.Column="1" Margin="12.2,253,52.4,130.6"
+             VerticalAlignment="Center" Foreground="White" Height="26" HorizontalAlignment="Center"/>
+        <TextBox x:Name="tb_value2" Grid.Column="1" Height="25" Margin="12.2,279,10.4,105.6" VerticalContentAlignment="Center"
+             TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" Width="283"/>
         <Button Click="OpenPageChart" Content="Продолжить" Grid.Column="1" HorizontalAlignment="Center"
-            Margin="195.2,247,10.4,137.6" VerticalAlignment="Center" Width="100" Height="25" Background="White" BorderBrush="Black"/>
+            Margin="195.2,340,10.4,45.6" VerticalAlignment="Center" Width="100" Height="25" Background="White" BorderBrush="Black"/>
     </Grid>
 </Page>
