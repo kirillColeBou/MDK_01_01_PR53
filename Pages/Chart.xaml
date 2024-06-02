@@ -5,10 +5,20 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PermDynamics_Тепляков.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="Chart">
+      d:DesignHeight="420" d:DesignWidth="793.6"
+      Title="Chart" SizeChanged="Page_SizeChanged">
 
     <Grid>
-        
+        <Grid.Background>
+            <ImageBrush ImageSource="/PermDynamics_Тепляков;component/Images/chart.jpg"/>
+        </Grid.Background>
+        <ScrollViewer x:Name="scroll" Grid.Row="0" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden">
+            <Canvas x:Name="canvas" Grid.Row="0" Margin="10,10,10,10" HorizontalAlignment="Left"/>
+        </ScrollViewer>
+        <Grid Width="200" Grid.Row="0" Height="100" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10,0,0,10"
+          Background="#7FFFFFFF">
+            <Label x:Name="current_value" Grid.Row="0" Content="Тек. знач: " Margin="10,10,10,0" VerticalAlignment="Top"/>
+            <Label x:Name="average_value" Grid.Row="0" Content="Сред. знач: " Margin="10,36,10,0" VerticalAlignment="Top"/>
+        </Grid>
     </Grid>
 </Page>
