@@ -27,7 +27,9 @@ namespace PermDynamics_Тепляков.Pages
         public double maxValue = 0;
         double averageValue = 0;
         public DispatcherTimer dispatcherTimer = new DispatcherTimer();
-        
+        private Line averageLine;
+        private double AverageValue = 0;
+
         public Chart(MainWindow mainWindow)
         {
             InitializeComponent();
@@ -45,6 +47,8 @@ namespace PermDynamics_Тепляков.Pages
             Random random = new Random();
             double value = mainWindow.pointsInfo[mainWindow.pointsInfo.Count - 1].value;
             double newValue = value * (random.NextDouble() + 0.5d);
+            double sum = mainWindow.pointsInfo.Sum(p => p.value);
+            AverageValue = sum / mainWindow.pointsInfo.Count;
             mainWindow.pointsInfo.Add(new Classes.PointInfo(newValue));
             ControlCreateChart();
         }
@@ -73,6 +77,21 @@ namespace PermDynamics_Тепляков.Pages
                 mainWindow.pointsInfo[i].line = line;
                 canvas.Children.Add(line);
             }
+            if (averageLine != null)
+            {
+                canvas.Children.Remove(averageLine);
+            }
+            averageLine = new Line
+            {
+                X1 = 0,
+                X2 = mainWindow.pointsInfo.Count * 20,
+                Y1 = actualHeightCanvas - ((averageValue / maxValue) * actualHeightCanvas),
+                Y2 = actualHeightCanvas - ((averageValue / maxValue) * actualHeightCanvas),
+                Stroke = Brushes.Blue,
+                StrokeThickness = 2,
+                StrokeDashArray = new DoubleCollection { 4, 2 }
+            };
+            canvas.Children.Add(averageLine);
         }
 
         public void CreatePoint()
@@ -118,6 +137,21 @@ namespace PermDynamics_Тепляков.Pages
                     mainWindow.pointsInfo[i].line.Stroke = Brushes.Green;
                 }
             }
+            if (averageLine != null)
+            {
+                canvas.Children.Remove(averageLine);
+            }
+            averageLine = new Line
+            {
+                X1 = 0,
+                X2 = mainWindow.pointsInfo.Count * 20,
+                Y1 = actualHeightCanvas - ((averageValue / maxValue) * actualHeightCanvas),
+                Y2 = actualHeightCanvas - ((averageValue / maxValue) * actualHeightCanvas),
+                Stroke = Brushes.Yellow,
+                StrokeThickness = 2,
+                StrokeDashArray = new DoubleCollection { 4, 2 }
+            };
+            canvas.Children.Add(averageLine);
             canvas.Width = mainWindow.pointsInfo.Count * 20 + 300;
             scroll.ScrollToHorizontalOffset(canvas.Width);
             current_value.Content = "Тек. знач: " + Math.Round(value, 2);

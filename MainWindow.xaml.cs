@@ -22,9 +22,21 @@ namespace PermDynamics_Тепляков
     {
         public List<Classes.PointInfo> pointsInfo = new List<Classes.PointInfo>();
 
+        public enum pages
+        {
+            main, chart
+        }
+
         public MainWindow()
         {
             InitializeComponent();
+            OpenPages(pages.main);
+        }
+
+        public void OpenPages(pages _pages)
+        {
+            if (_pages == pages.main) frame.Navigate(new Pages.Main(this));
+            else if (_pages == pages.chart) frame.Navigate(new Pages.Chart(this));
         }
     }
 }
