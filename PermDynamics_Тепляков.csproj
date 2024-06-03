@@ -206,7 +206,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="SQL\pr53_ChartsData.sql" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\chart.jpg" />
     <Resource Include="Images\icon-white.png" />
